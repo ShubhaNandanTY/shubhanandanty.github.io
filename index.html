@@ -614,30 +614,46 @@
     </div>
 
     <script>
-        // Visitor counter using persistent storage
-        async function updateVisitorCount() {
+        // Enhanced visitor counter with localStorage
+        function updateVisitorCount() {
             try {
-                // Get current count
-                let visitorData = await window.storage.get('portfolio-visitors', true);
-                let count = 1;
-                
-                if (visitorData && visitorData.value) {
-                    count = parseInt(visitorData.value) + 1;
+                // Check if localStorage is available
+                if (typeof localStorage === 'undefined') {
+                    document.getElementById('visitor-count').textContent = '---';
+                    return;
                 }
                 
-                // Update count
-                await window.storage.set('portfolio-visitors', count.toString(), true);
+                // Get current count
+                let count = localStorage.getItem('portfolio-visitors');
                 
-                // Display count
+                // Initialize if first visit
+                if (count === null) {
+                    count = 1;
+                } else {
+                    count = parseInt(count);
+                    // Validate the number
+                    if (isNaN(count) || count < 0) {
+                        count = 1;
+                    } else {
+                        count = count + 1;
+                    }
+                }
+                
+                // Save the updated count
+                localStorage.setItem('portfolio-visitors', count.toString());
+                
+                // Display with commas for thousands
                 document.getElementById('visitor-count').textContent = count.toLocaleString();
+                
             } catch (error) {
-                console.error('Error updating visitor count:', error);
+                // Silent fail - don't break the page
+                console.warn('Visitor counter not working:', error);
                 document.getElementById('visitor-count').textContent = '---';
             }
         }
         
-        // Run on page load
-        updateVisitorCount();
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', updateVisitorCount);
     </script>
 </body>
 </html>
