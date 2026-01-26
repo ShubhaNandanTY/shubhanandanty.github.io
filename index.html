@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +25,9 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         nav ul {
@@ -34,6 +36,7 @@
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            flex: 1;
         }
 
         nav a {
@@ -307,6 +310,11 @@
             <li><a href="#certifications">Certifications</a></li>
             <li><a href="#hobbies">Hobbies</a></li>
         </ul>
+        <div style="color: white; margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+            <span>👁️</span>
+            <span id="visitor-count">Loading...</span>
+            <span>visitors</span>
+        </div>
     </nav>
 
     <div class="container">
@@ -592,6 +600,44 @@
             <section id="hobbies">
                 <h2>Hobbies/Interests</h2>
                 <div class="hobbies-section">
-                    <p class="hobby-item">🏏 I love playing cricket! Whether it's a casual match with friends or following international tournaments, cricket has always been a passion of mine.</p>
-                    <p class="hobby-item">🍳 I enjoy cooking and experimenting with different cuisines. There's something satisf
+                    <p class="hobby-item">🏏 <strong>Cricket:</strong> I love playing cricket! Whether it's a casual match with friends or following international tournaments, cricket has always been a passion of mine.</p>
+                    <p class="hobby-item">🍳 <strong>Cooking:</strong> I enjoy cooking and experimenting with different cuisines. There's something satisfying about creating delicious meals and exploring new flavors and recipes.</p>
+                    <p class="hobby-item">✈️ <strong>Travelling:</strong> I love exploring new places and experiencing different cultures. Travelling gives me fresh perspectives and inspires creativity in both my personal and professional life.</p>
+                </div>
+            </section>
 
+            <footer>
+                <p>&copy; 2026 Shubhanandan T Y. All rights reserved.</p>
+                <p>Last updated: January 2026</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Visitor counter using persistent storage
+        async function updateVisitorCount() {
+            try {
+                // Get current count
+                let visitorData = await window.storage.get('portfolio-visitors', true);
+                let count = 1;
+                
+                if (visitorData && visitorData.value) {
+                    count = parseInt(visitorData.value) + 1;
+                }
+                
+                // Update count
+                await window.storage.set('portfolio-visitors', count.toString(), true);
+                
+                // Display count
+                document.getElementById('visitor-count').textContent = count.toLocaleString();
+            } catch (error) {
+                console.error('Error updating visitor count:', error);
+                document.getElementById('visitor-count').textContent = '---';
+            }
+        }
+        
+        // Run on page load
+        updateVisitorCount();
+    </script>
+</body>
+</html>
