@@ -310,11 +310,6 @@
             <li><a href="#certifications">Certifications</a></li>
             <li><a href="#hobbies">Hobbies</a></li>
         </ul>
-        <div style="color: white; margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
-            <span>👁️</span>
-            <span id="visitor-count">Loading...</span>
-            <span>visitors</span>
-        </div>
     </nav>
 
     <div class="container">
@@ -600,60 +595,4 @@
             <section id="hobbies">
                 <h2>Hobbies/Interests</h2>
                 <div class="hobbies-section">
-                    <p class="hobby-item">🏏 <strong>Cricket:</strong> I love playing cricket! Whether it's a casual match with friends or following international tournaments, cricket has always been a passion of mine.</p>
-                    <p class="hobby-item">🍳 <strong>Cooking:</strong> I enjoy cooking and experimenting with different cuisines. There's something satisfying about creating delicious meals and exploring new flavors and recipes.</p>
-                    <p class="hobby-item">✈️ <strong>Travelling:</strong> I love exploring new places and experiencing different cultures. Travelling gives me fresh perspectives and inspires creativity in both my personal and professional life.</p>
-                </div>
-            </section>
-
-            <footer>
-                <p>&copy; 2026 Shubhanandan T Y. All rights reserved.</p>
-                <p>Last updated: January 2026</p>
-            </footer>
-        </main>
-    </div>
-
-    <script>
-        // Enhanced visitor counter with localStorage
-        function updateVisitorCount() {
-            try {
-                // Check if localStorage is available
-                if (typeof localStorage === 'undefined') {
-                    document.getElementById('visitor-count').textContent = '---';
-                    return;
-                }
-                
-                // Get current count
-                let count = localStorage.getItem('portfolio-visitors');
-                
-                // Initialize if first visit
-                if (count === null) {
-                    count = 1;
-                } else {
-                    count = parseInt(count);
-                    // Validate the number
-                    if (isNaN(count) || count < 0) {
-                        count = 1;
-                    } else {
-                        count = count + 1;
-                    }
-                }
-                
-                // Save the updated count
-                localStorage.setItem('portfolio-visitors', count.toString());
-                
-                // Display with commas for thousands
-                document.getElementById('visitor-count').textContent = count.toLocaleString();
-                
-            } catch (error) {
-                // Silent fail - don't break the page
-                console.warn('Visitor counter not working:', error);
-                document.getElementById('visitor-count').textContent = '---';
-            }
-        }
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', updateVisitorCount);
-    </script>
-</body>
-</html>  
+                    <p class="hobby-item">🏏 <strong>Cricket:</strong> I love playing cricket
